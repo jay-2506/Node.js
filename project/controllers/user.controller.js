@@ -1,4 +1,12 @@
 import User from "../models/user.models.js";
+import jwt from "jsonwebtoken";
+
+
+
+const generateToken = (userId, name)=>{
+  return jwt.sign({id:userId , role:user.role},process.env.JWT_SECRET,{expiresIn:"7d"})
+  
+};
 
 // Create a new user
 export const createUser = async (req, res) => {
@@ -62,3 +70,25 @@ export const deleteUser = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+// login
+export const login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    let user = await User.findOne({ email });
+    if (!user) return res.status(400).json({ message: "User not found" });
+
+    const isMatch = await user.comparePassword(password);
+    if (!isMatch) return res.status(400).json({ message: "Invalid Password" });
+
+    res.status(200).json({
+      message: "Login Successful",
+      token: generateToken(user._id, user.name),
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+

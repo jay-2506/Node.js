@@ -6,13 +6,12 @@ function getData() {
   });
 }
 
-
-getData().then(result => {
+getData().then((result) => {
   console.log("Using Promise:", result);
 });
 
 async function showData() {
-  const result = await getData();   
+  const result = await getData();
   console.log("Using async/await:", result);
 }
 
