@@ -8,7 +8,7 @@ export const sendmail = async (req, res) => {
       secure: false,
       auth: {
         user:process.env.user,
-        pass:prprocess.env.pass
+        pass:process.env.pass
       },
     });
 
