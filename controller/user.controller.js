@@ -18,7 +18,7 @@ export const readuser = async (req, res) => {
     const users = await User.find();
     res.status(200).json({ users });
   } catch (error) {
-    console.log(error);
+    console.log(error)
     res.status(400).json({ message: "Users not found" });
   }
 };
@@ -68,7 +68,7 @@ export const deleteuser = async (req, res) => {
     }
     res.status(200).json({ message: "User deleted" });
   } catch (error) {
-    console.log(error);
+    console.log(error)
     res.status(400).json({ message: "user not delete" });
   }
 };
